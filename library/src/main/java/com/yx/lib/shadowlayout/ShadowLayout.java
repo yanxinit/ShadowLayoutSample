@@ -24,12 +24,7 @@ public class ShadowLayout extends FrameLayout {
     private static final int MIN_RADIUS = 1;
     private static final int MIN_ANGLE = 0;
 
-    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG) {
-        {
-            setDither(true);
-            setFilterBitmap(true);
-        }
-    };
+    private final Paint mPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
 
     private Bitmap mBitmap;
     private Canvas mCanvas = new Canvas();
@@ -76,8 +71,11 @@ public class ShadowLayout extends FrameLayout {
     }
 
     private void init() {
+        mPaint.setDither(true);
+        mPaint.setFilterBitmap(true);
         mPaint.setColor(mShadowColor);
         mPaint.setMaskFilter(new BlurMaskFilter(mShadowRadius, BlurMaskFilter.Blur.OUTER));
+
         mShadowDx = (float) ((mShadowDistance) * Math.cos(mShadowAngle / 180.0f * Math.PI));
         mShadowDy = (float) ((mShadowDistance) * Math.sin(mShadowAngle / 180.0f * Math.PI));
         setPadding(mShadowPadding, mShadowPadding, mShadowPadding, mShadowPadding);
